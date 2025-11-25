@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type QuestionType = "boolean" | "input" | "checkbox";
 
 export interface Question {

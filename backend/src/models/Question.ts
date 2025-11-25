@@ -1,42 +1,31 @@
-import { DataTypes, Model, Optional } from "sequelize";
-import sequelize from "../db/index";
-import Quiz from "./Quiz";
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../db";
 
-interface QuestionAttributes {
-  id: number;
-  quizId: number;
-  text: string;
-}
+type QuestionType = "boolean" | "input" | "checkbox";
 
-interface QuestionCreation extends Optional<QuestionAttributes, "id"> {}
-
-class Question extends Model<QuestionAttributes, QuestionCreation>
-  implements QuestionAttributes {
+class Question extends Model {
   public id!: number;
   public quizId!: number;
   public text!: string;
+  public type!: QuestionType;
+  public options?: string[];
+  public correct?: any;
 }
 
 Question.init(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    quizId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    text: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    quizId: { type: DataTypes.INTEGER, allowNull: false },
+    text: { type: DataTypes.STRING, allowNull: false },
+    type: { type: DataTypes.STRING, allowNull: false },
+    options: { type: DataTypes.JSON },
+    correct: { type: DataTypes.JSON },
   },
-  { sequelize, tableName: "questions" }
+  {
+    sequelize,
+    modelName: "Question",
+    tableName: "questions",
+  }
 );
-
-Quiz.hasMany(Question, { foreignKey: "quizId", as: "questions" });
-Question.belongsTo(Quiz, { foreignKey: "quizId" });
 
 export default Question;

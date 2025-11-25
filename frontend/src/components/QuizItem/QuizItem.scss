@@ -1,0 +1,26 @@
+.quizzes_list {
+  margin-bottom: 30px;
+}
+
+.quiz_item {
+  display: flex;
+  width: 400px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  &-link {
+    max-width: 200px;
+    color: #fbfbfc;
+  }
+
+  &-btn {
+    background-color: #624d9b;
+    color: #fff;
+
+    &:hover {
+      border-color: #463772;
+      background-color: #463772;
+    }
+  }
+}

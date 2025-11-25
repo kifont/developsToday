@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const API_URL = "http://localhost:3000";
 
 export async function getQuizzes() {
     return fetch(`${API_URL}/quizzes`).then(res => res.json());
 }
 
-export async function getQuiz(id: number) {
+export async function getQuiz(id: string) {
     return fetch(`${API_URL}/quizzes/${id}`).then(res => res.json());
 }
 
